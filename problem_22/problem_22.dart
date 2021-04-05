@@ -6,18 +6,18 @@
 
 import 'dart:convert';
 import 'dart:io';
-    
-String readFile(String name){
+
+String readFile(String name) {
   var file = File(name);
   var content = file.readAsStringSync();
   return content;
 }
 
-List listify(String names){
-  return jsonDecode('[$names]') ;
+List listify(String names) {
+  return jsonDecode('[$names]');
 }
 
-int getAlphabetSum(String word){
+int getAlphabetSum(String word) {
   return word.runes.fold(
     0,
     (prevValue, element) => prevValue + element - 64,
@@ -27,10 +27,10 @@ int getAlphabetSum(String word){
 void main() {
   var nameList = listify(readFile('names.txt'));
   nameList.sort();
-  
+
   num res = 0;
-  for(var entry in nameList.asMap().entries){
-    res += (entry.key+1) * getAlphabetSum(entry.value);
+  for (var entry in nameList.asMap().entries) {
+    res += (entry.key + 1) * getAlphabetSum(entry.value);
   }
 
   print(res);
